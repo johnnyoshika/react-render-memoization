@@ -17,8 +17,13 @@ const Button = React.memo(
     children: React.ReactNode;
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   }) => {
-    console.log("render Button");
-    return <button onClick={onClick}>{children}</button>;
+    console.log(`render Button`);
+    return (
+      <button onClick={onClick}>
+        {(() => console.log(`render Button jsx`))()}
+        {children}
+      </button>
+    );
   }
 );
 
@@ -37,8 +42,10 @@ export default function App() {
   return (
     <div className="App">
       <Counter count={count} />
-      <Button onClick={increment}>Increment</Button>
-      <Button onClick={decrement}>Decrement</Button>
+      <div>
+        <Button onClick={increment}>Increment</Button>
+        <Button onClick={decrement}>Decrement</Button>
+      </div>
     </div>
   );
 }
