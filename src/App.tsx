@@ -42,10 +42,8 @@ export default function App() {
   return (
     <div className="App">
       <Counter count={count} />
-      <div>
-        <Button onClick={increment}>Increment</Button>
-        <Button onClick={decrement}>Decrement</Button>
-      </div>
+      <Button onClick={increment}>Increment</Button>
+      <Button onClick={decrement}>Decrement</Button>
     </div>
   );
 }
