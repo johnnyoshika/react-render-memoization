@@ -9,24 +9,36 @@ const Counter = ({ count }: { count: number }) => {
   );
 };
 
-const Button = ({
-  children,
-  onClick
-}: {
-  children: React.ReactNode;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}) => {
-  return <button onClick={onClick}>{children}</button>;
-};
+const Button = React.memo(
+  ({
+    children,
+    onClick
+  }: {
+    children: React.ReactNode;
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  }) => {
+    console.log("render Button");
+    return <button onClick={onClick}>{children}</button>;
+  }
+);
 
 export default function App() {
   const [count, setCount] = React.useState(0);
 
+  const increment = React.useCallback(
+    () => setCount((oldCount) => oldCount + 1),
+    []
+  );
+  const decrement = React.useCallback(
+    () => setCount((oldCount) => oldCount - 1),
+    []
+  );
+
   return (
     <div className="App">
       <Counter count={count} />
-      <Button onClick={() => setCount(count + 1)}>Increment</Button>
-      <Button onClick={() => setCount(count - 1)}>Decrement</Button>
+      <Button onClick={increment}>Increment</Button>
+      <Button onClick={decrement}>Decrement</Button>
     </div>
   );
 }
